@@ -1,0 +1,19 @@
+/* Custom CSS to override FAB icon */
+.chrome-extension-fab[title*="WAutoSend"],
+.chrome-extension-fab[aria-label*="WAutoSend"],
+button[title*="WAutoSend"],
+button[aria-label*="WAutoSend"] {
+    background-image: url('chrome-extension://EXTENSION_ID/icons/icon-32.png') !important;
+    background-size: 16px 16px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    font-size: 0 !important; /* Hide the "WAS" text */
+}
+
+/* Hide any text content in the button */
+.chrome-extension-fab[title*="WAutoSend"] span,
+.chrome-extension-fab[aria-label*="WAutoSend"] span,
+button[title*="WAutoSend"] span,
+button[aria-label*="WAutoSend"] span {
+    display: none !important;
+}
