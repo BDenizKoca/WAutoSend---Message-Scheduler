@@ -1,265 +1,194 @@
-# 📨 WAutoSend - WhatsApp Web Message Scheduler
 
-**WAutoSend (WAS)** is a Chrome extension that enables automated scheduling and sending of WhatsApp Web messages. Schedule multiple messages, use clipboard content, and manage everything from a clean, non-intrusive interface.
+```markdown
+# 🧩 WAutoSend
 
-## ✨ Features
-
-- **⏰ Schedule Messages**: Set specific times (24h format) for automatic message delivery
-- **📋 Clipboard Integration**: Automatically use clipboard content when message field is empty
-- **📱 Multiple Schedules**: Manage multiple scheduled messages simultaneously
-- **🔄 Auto-Reload**: Prevents WhatsApp disconnection with configurable page reload
-- **💾 Persistent Storage**: Schedules survive browser restarts
-- **🎨 Clean UI**: Non-intrusive overlay interface
-- **🔒 Privacy-First**: No data collection, fully client-side operation
-
-## 🚀 Installation
-
-### Method 1: Developer Mode (Recommended for Testing)
-
-1. **Download the Extension**
-   - Clone or download this repository
-   - Navigate to the `wautosend` folder
-
-2. **Enable Developer Mode**
-   - Open Chrome and go to `chrome://extensions/`
-   - Toggle "Developer mode" in the top-right corner
-
-3. **Load the Extension**
-   - Click "Load unpacked"
-   - Select the `wautosend` folder
-   - The extension should now appear in your extensions list
-
-4. **Verify Installation**
-   - Visit [WhatsApp Web](https://web.whatsapp.com)
-   - Look for the "WAS" button in the bottom-right corner
-
-### Method 2: Chrome Web Store (Future)
-*Coming soon - the extension will be available on the Chrome Web Store after testing.*
-
-## 📖 How to Use
-
-### Basic Setup
-
-1. **Open WhatsApp Web**
-   - Navigate to [web.whatsapp.com](https://web.whatsapp.com)
-   - Log in with your phone as usual
-
-2. **Find the WAS Interface**
-   - Look for the green "WAS" button in the bottom-right corner
-   - Click it to open the scheduling panel
-
-3. **Schedule Your First Message**
-   - Set a time using the time picker (24h format)
-   - Enter your message text
-   - Optionally enable "Use clipboard if message is empty"
-   - Click "Add Schedule"
-
-### Advanced Features
-
-#### Clipboard Fallback
-- Enable the checkbox "Use clipboard if message is empty"
-- Leave the message field blank
-- The extension will use whatever is in your clipboard at send time
-
-#### Multiple Schedules
-- Add multiple messages with different times
-- Each schedule operates independently
-- Messages are sorted by time in the interface
-
-#### Status Monitoring
-- Green indicator: Connected and running
-- Yellow indicator: Running but disconnected
-- Red indicator: Not running or error
-
-### Keyboard Shortcuts
-
-- **Ctrl + Shift + W**: Toggle WAS panel on WhatsApp Web
-- **Escape**: Close WAS panel
-
-## ⚙️ Configuration
-
-### Settings (Future Enhancement)
-The extension includes configurable settings:
-
-- **Auto-reload interval**: Default 30 minutes
-- **Debug mode**: Enable console logging
-- **Auto-reload**: Enable/disable automatic page refresh
-
-### Storage Management
-- All schedules are stored locally using Chrome's storage API
-- No data is transmitted externally
-- Clear all data by removing the extension
-
-## 🔧 Technical Details
-
-### File Structure
-```
-wautosend/
-├── manifest.json          # Chrome extension manifest
-├── content.js            # Main coordinator script
-├── storage.js            # Data persistence layer
-├── scheduler.js          # Message timing and sending
-├── ui.js                # Interface management
-├── styles.css           # UI styling
-├── popup.html           # Extension popup
-├── popup.js             # Popup functionality
-└── icons/               # Extension icons
-    └── icon.svg
-```
-
-### Architecture
-
-- **Manifest V3**: Modern Chrome extension architecture
-- **Content Script**: Injected into WhatsApp Web pages
-- **Local Storage**: Chrome storage API for persistence
-- **DOM Manipulation**: Direct interaction with WhatsApp Web interface
-
-### Permissions Required
-
-- `activeTab`: Access to current WhatsApp Web tab
-- `scripting`: Inject content scripts
-- `storage`: Store schedules locally
-- `host_permissions`: Access to web.whatsapp.com
-
-### WhatsApp Web Selectors
-The extension uses these selectors (subject to change):
-```javascript
-inputBox: '[contenteditable="true"][data-tab]'
-sendButton: '[data-testid="send"]'
-chatArea: '[data-testid="conversation-panel-messages"]'
-```
-
-## 🛠️ Development
-
-### Building from Source
-
-1. **Clone Repository**
-   ```bash
-   git clone <repository-url>
-   cd WAutoSend/wautosend
-   ```
-
-2. **Load in Chrome**
-   - Follow installation steps above for developer mode
-
-3. **Testing**
-   - Open browser console (F12) for debug logs
-   - Test with different time schedules
-   - Verify persistence after page reload
-
-### Debugging
-
-- Enable debug mode in settings (future feature)
-- Check browser console for `[WAS]` prefixed logs
-- Use `window.WAS.status()` in console for extension status
-
-### Code Style
-
-- **ES6+ JavaScript**: Modern syntax and features
-- **Modular Design**: Separate concerns across files
-- **Comprehensive Comments**: Every function documented
-- **Error Handling**: Graceful failure and recovery
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Extension not appearing on WhatsApp Web**
-- Ensure you're on web.whatsapp.com (not wa.me or other variations)
-- Check that the extension is enabled in Chrome
-- Try refreshing the page
-
-**Messages not sending**
-- Verify WhatsApp is connected (no disconnection banner)
-- Check that input box is accessible
-- Ensure time format is correct (HH:MM)
-
-**Schedules disappearing**
-- Check browser storage permissions
-- Verify extension hasn't been disabled
-- Check for browser updates
-
-**UI not responsive**
-- Try refreshing WhatsApp Web
-- Check browser console for errors
-- Restart the extension
-
-### Debug Information
-
-Access debug info in browser console:
-```javascript
-// Get overall status
-window.WAS.status()
-
-// Check specific modules
-window.WAS.storage()
-window.WAS.scheduler()
-window.WAS.ui()
-```
-
-## 🔒 Privacy & Security
-
-### Data Handling
-- **No External Servers**: All processing happens locally
-- **No Data Collection**: No analytics or tracking
-- **Local Storage Only**: Messages stored in browser's local storage
-- **No API Calls**: Direct DOM interaction only
-
-### Security Considerations
-- Extension only runs on WhatsApp Web domain
-- Minimal permissions requested
-- Open source for transparency
-- No background network activity
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-### Development Guidelines
-- Follow existing code style
-- Add comments for new functions
-- Test with multiple scenarios
-- Update documentation
-
-## 📞 Support
-
-For issues, questions, or feature requests:
-
-1. Check the troubleshooting section above
-2. Search existing issues on GitHub
-3. Create a new issue with detailed description
-4. Include browser version and extension version
-
-## 🚨 Disclaimer
-
-This extension:
-- Is not affiliated with WhatsApp or Meta
-- Uses WhatsApp Web's public interface
-- May break if WhatsApp updates their interface
-- Should be used responsibly and in compliance with WhatsApp's terms
-
-## 🔄 Changelog
-
-### Version 1.0.0
-- Initial release
-- Basic message scheduling
-- Clipboard integration
-- Auto-reload functionality
-- Clean overlay UI
-- Persistent storage
+**Schedule WhatsApp Web messages. Without code. Without APIs. Without bullshit.**
 
 ---
 
-**Made with ❤️ for automation enthusiasts**
+## ✨ What is this?
 
-*Remember to use this tool responsibly and respect others' time and privacy.*
+WAutoSend is a local-only Chrome extension that lets you schedule messages to be automatically sent via [WhatsApp Web](https://web.whatsapp.com). It’s a small script that watches the clock and clicks “send” when it’s time. That’s it.
+
+---
+
+## 💡 Why?
+
+Because I needed it.  
+And because everything else either required WhatsApp Business, signing up for some shady API key, or just didn’t work.  
+So I built a dumb, brute-force solution that just... works. Locally. Quietly. Reliably.
+
+---
+
+## ⚙️ Features
+
+- ⏰ Schedule multiple messages at custom times
+- 📝 Type messages or pull from clipboard
+- 🧠 Sends automatically if the tab is open
+- 🔁 Auto-reloads WhatsApp Web every 30 mins to avoid disconnect
+- 💾 Everything saved in your browser (via `chrome.storage`)
+- 🖼️ In-page overlay UI — no weird popups or menus
+- ❌ No APIs, no tracking, no servers
+
+---
+
+## 🛠️ How to Install
+
+> ⚠ This is not on the Chrome Store. It’s DIY.
+
+1. Clone this repo or [download the ZIP](https://github.com/yourname/wautosend/archive/refs/heads/main.zip)
+2. Unzip it somewhere on your computer
+3. Go to `chrome://extensions/`
+4. Turn on **Developer Mode**
+5. Click **Load Unpacked**
+6. Select the `wautosend/` folder
+7. Go to [web.whatsapp.com](https://web.whatsapp.com)
+8. You’ll see a floating “WAS” launcher. Click it to open the dashboard.
+
+That’s it. Schedule a message. Keep the tab open. Done.
+
+---
+
+## 🧪 How It Works
+
+This isn’t magic.  
+It literally pastes your message into the input field and clicks the send button at the time you tell it. Like a polite ghost.
+
+It doesn’t know who you’re talking to.  
+It doesn’t care what your message says.  
+It just… sends it.
+
+# WAutoSend — WhatsApp Web Message Scheduler
+
+Local-only Chrome extension that schedules and sends messages in WhatsApp Web. No APIs. No servers. Just a clean in-page UI and a reliable “send at time” engine.
+
+![Logo](icons/icon-128.png)
+
+---
+
+## Highlights
+
+- Schedule multiple messages at specific times (24h)
+- Multi-contact support (comma-separated names); auto chat-switch via search + Tab navigation
+- Message source: typed text or clipboard fallback
+- Smart delivery: send confirmation detection + exponential backoff retries
+- Anti-inactivity nudges (helps avoid Web disconnects over long waits)
+- Clean overlay UI with a floating FAB and keyboard shortcut
+- Visual status, version label, and human-friendly time display
+- Everything local in your browser (chrome.storage); no tracking
+
+---
+
+## Install (Unpacked)
+
+This is not in the Chrome Web Store. Load it locally:
+
+1) Clone the repo
+
+```bash
+git clone https://github.com/BDenizKoca/WAutoSend---Message-Scheduler.git
+cd WAutoSend---Message-Scheduler/wautosend
+```
+
+2) In Chrome go to chrome://extensions
+- Enable Developer mode
+- Click “Load unpacked” and select the `wautosend/` folder
+
+3) Open https://web.whatsapp.com and log in
+
+4) Use the floating FAB or press Ctrl+Shift+W to open the scheduler panel
+
+---
+
+## Usage
+
+1) Open WhatsApp Web and bring up the panel (FAB or Ctrl+Shift+W)
+2) Add a schedule:
+	 - Time (24h)
+	 - Message text or “Use clipboard if empty”
+	 - Contacts (optional, comma-separated; if empty, sends to the current chat)
+3) Click “Test Send” to validate selectors on your current page
+4) Keep the tab open; the extension will send at the scheduled time(s)
+
+Tips:
+- For groups/contacts with similar names, add extra qualifiers in the contact name
+- Leave WhatsApp Web pinned; anti-inactivity helps but the tab must remain available
+
+---
+
+## What It Actually Does
+
+At send time the extension:
+- Searches for a contact name, tabs to the result, and opens the chat
+- Injects your message (clipboard-first with fallbacks)
+- Sends, then verifies by checking the cleared input and visible outgoing bubble
+- Retries with backoff if something fails
+
+No external services. It automates the same UI steps a person would.
+
+---
+
+## Keyboard & UI
+
+- FAB: floating circular button in bottom-right of WhatsApp Web
+- Shortcut: Ctrl+Shift+W to toggle the panel
+- Panel: taller layout to show more scheduled items (scrollable content area)
+
+---
+
+## Troubleshooting
+
+- I don’t see the FAB
+	- Reload the extension (chrome://extensions → Reload) and refresh WhatsApp Web
+
+- Toolbar shows a text icon
+	- Reload the extension. A background worker force-sets toolbar icons on startup
+
+- Chat doesn’t switch to a contact
+	- Ensure the exact visible name matches your WhatsApp contact/group
+	- Try adding a unique qualifier (e.g., “John S.” vs “John”)
+
+- Clipboard prompts
+	- Grant permission when Chrome asks; or type the message directly
+
+---
+
+## Project Structure
+
+```
+wautosend/
+├─ manifest.json
+├─ background.js                 # Sets toolbar icons on startup
+├─ content.js                    # Bootstraps UI + scheduler in the page
+├─ scheduler.js                  # Timing, send flow, retries, confirmations
+├─ storage.js                    # chrome.storage wrapper and helpers
+├─ ui.js                         # Overlay UI + FAB
+├─ styles.css                    # Overlay styling (FAB, panel)
+├─ popup.html / popup.js         # Toolbar popup
+├─ debug.js                      # Optional debug logs/helpers
+├─ icons/
+│  ├─ icon-16.png  icon-24.png  icon-32.png  icon-38.png  icon-48.png  icon-128.png
+├─ LICENSE
+└─ README.md
+```
+
+---
+
+## Privacy & Legal
+
+- No data leaves your machine; everything is stored locally by Chrome
+- Not affiliated with WhatsApp or Meta
+- Use responsibly and at your own risk
+
+---
+
+## License
+
+MIT
+
+---
+
+## Contributing
+
+PRs and issues welcome. Keep it simple and bloat-free.
+
