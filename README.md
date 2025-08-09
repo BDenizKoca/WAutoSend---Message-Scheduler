@@ -12,7 +12,7 @@ Local-only Chrome extension that schedules and sends messages in WhatsApp Web. N
 
 Because I needed it.  
 And because everything else either required WhatsApp Business, signing up for some shady API key, or just didn’t work.  
-So I built a dumb, brute-force solution that just... works. Locally. Quietly. Reliably.
+So I built a dumb, brute-force solution that just... works. Locall and mostly reliably.
 
 ---
 
@@ -46,13 +46,13 @@ cd WAutoSend---Message-Scheduler
 
 3) Open https://web.whatsapp.com and log in
 
-4) Use the floating FAB or press Ctrl+Shift+W to open the scheduler panel
+4) Use the floating FAB
 
 ---
 
 ## Usage
 
-1) Open WhatsApp Web and bring up the panel (FAB or Ctrl+Shift+W)
+1) Open WhatsApp Web and bring up the panel
 2) Add a schedule:
    - Time (24h)
    - Message text or "Use clipboard if empty"
@@ -81,8 +81,6 @@ No external services. It automates the same UI steps a person would.
 ## Keyboard & UI
 
 - FAB: floating circular button in bottom-right of WhatsApp Web
-- Shortcut: Ctrl+Shift+W to toggle the panel
-- Panel: taller layout to show more scheduled items (scrollable content area)
 
 ---
 
